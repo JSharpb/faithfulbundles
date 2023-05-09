@@ -285,7 +285,7 @@ a {
     }
 
     .hero {
-        padding-top: 20dvh;
+        padding-top: 20vh;
         grid-template-rows: var(----mobile-rows-hero);
         align-content: space-between;
         justify-items: center;
