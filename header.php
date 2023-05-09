@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html <?php language_attributes(); ?>>
+    <head>
+        <meta charset="<?php bloginfo( 'charset' ); ?>" />
+        <title><?php wp_title(); ?></title>
+        <link rel="profile" href="http://gmpg.org/xfn/11" />
+        <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+        <?php if ( is_singular() && get_option( 'thread_comments' ) ) wp_enqueue_script( 'comment-reply' ); ?>
+        <?php wp_head(); ?>
+
+        <style>
+            :root {
+                /* Responsivity */
+                --mobile-columns: [content-start] 100% [content-end];
+                --mobile-rows-hero: auto auto max-content;
+                --columns-hero: [content-start] 6fr [split] 4fr [content-end];
+                --columns-what-how: [content-start] 4fr [split] 9fr [content-end];
+                --columns-author: [content-start] 2fr [split] 1fr [content-end];
+                /* Colors */
+                --hero-stop-1: hsl(220deg, 50%, 92%);
+                --hero-stop-2: hsl(220deg, 50%, 82%);
+                --bg-hero: linear-gradient(var(--hero-stop-1), var(--hero-stop-2));
+                --primary: hsl(220deg, 50%, 87%);
+                --content: hsl(240deg, 80%, 10%);
+                --content-on-dark: hsl(220deg, 50%, 95%);
+                --content-copyright: hsl(220deg, 0%, 70%);
+                --bg-what: hsl(220deg, 50%, 10%);
+                --bg-how: hsl(30deg, 50%, 98%);
+                --bg-author-closing: hsl(230deg, 100%, 10%);
+                --bg-footer: hsl(220deg, 30%, 5%);
+            }
+
+            html {
+                font-family: Montserrat, Arial;
+                font-size: calc(13px + 0.45vw);
+                color: var(--content);
+                line-height: 1.5rem;
+            }
+
+            body {
+                margin: 0;
+                background-color: var(--bg-author-closing);
+                overflow-x: hidden;
+            }
+
+            section {
+                display: grid;
+                padding: 3rem 2rem;
+            }
+
+            .hero {
+                box-sizing: border-box;
+                padding-top: 0px;
+                padding-bottom: 0.5rem;
+                max-width: 100%;
+                height: 85dvh;
+                grid-template-columns: var(--columns-hero);
+                grid-template-rows: auto max-content;
+                justify-items: center;
+                align-items: center;
+                column-gap: 3rem;
+                background-color: var(--primary);
+                background: var(--bg-hero);
+            }
+
+            .hero article:nth-of-type(2) {
+                justify-self: start;
+                width: min(25rem, 100%);
+            }
+
+            .logo {
+                display: block;
+                margin: -2rem auto 0px;
+                width: 26rem;
+                max-width: 100%;
+            }
+
+            .logo img {
+                width: 100%;
+            }
+
+            h1 {
+                margin: 0px auto;
+                text-align: center;
+                font-size: 0.8rem;
+                line-height: 1.2rem;
+            }
+
+            .hero h2 {
+                margin-bottom: 1rem;
+            }
+
+            .hero p {
+                margin-top: 0px;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+                font-weight: 600;
+                line-height: 1.2em;
+            }
+
+            article,
+            blockquote {
+                margin: 0px;
+                max-width: 100%;
+                min-width: 0px;
+            }
+
+            .socials {
+                grid-column: content;
+                width: calc(5em + 20%);
+                display: flex;
+                justify-content: space-between;
+            }
+
+                .socials > * {
+                    transition: transform 200ms ease-in-out;
+                }
+
+                    .socials > *:hover {
+                        transform: scale(1.3);
+                    }
+
+                .socials i {
+                    font-style: normal;
+                    font-size: 1.8rem
+                }
+
+            a {
+                color: inherit;
+            }
+
+            .what,
+            .how {
+                grid-template-columns: var(--columns-what-how);
+                column-gap: min(3rem, 5%);
+                align-items: start;
+            }
+
+            .what {
+                background-color: var(--bg-what);
+                color: var(--content-on-dark);
+            }
+
+            .how {
+                background-color: var(--bg-how);
+            }
+
+                .what h2,
+                .how h2 {
+                    justify-self: end;
+                    margin-top: 0.5rem;
+                    font-size: 1.75rem;
+                }
+
+                .what p,
+                .how p {
+                    margin: 0px;
+                    width: 90%;
+                }
+
+            .author-contact,
+            .closing {
+                background-color: var(--bg-author-closing);
+                color: var(--content-on-dark);
+            }
+
+            .author-contact {
+                grid-template-columns: var(--columns-author);
+                align-items: center;
+                column-gap: 3rem;
+                row-gap: 1rem;
+            }
+
+            .author-contact h2 {
+                grid-column: 1 / -1;
+                margin: 0px auto;
+                font-size: 1.7rem;
+            }
+
+            .author-contact p {
+                justify-self: end;
+                width: 60%;
+                width: min(30rem, 80%);
+                min-width: 0px;
+                max-width: 100%;
+            }
+
+            .envelope-container {
+                display: grid;
+                width: max-content;
+                font-size: 5rem;
+                text-decoration: none;
+            }
+
+            .fa-envelope {
+                grid-area: 1 / 1 / 1 / 1;
+            }
+
+                .envelope-container:hover .fa-envelope {
+                    opacity: 0;
+                }
+
+            .fa-envelope-open {
+                grid-area: 1 / 1 / 1 / 1;
+                margin-top: -13%;
+                opacity: 0;
+            }
+
+                .envelope-container:hover .fa-envelope-open {
+                    opacity: 1;
+                }
+
+            .closing {
+                justify-items: center;
+                align-items: center;
+                padding-top: 2rem;
+                padding-bottom: 3rem;
+            }
+
+                .closing blockquote {
+                    position: relative;
+                    padding: 0px;
+                    width: 40%;
+                    overflow: visible;
+                }
+
+                    blockquote:before {
+                        content: '\201C';
+                        display: block;
+                        position: absolute;
+                        top: 0px;
+                        right: 100%;
+                        font-size: 2rem;
+                    }
+
+                    blockquote:after {
+                        content: '\201D';
+                        display: block;
+                        position: absolute;
+                        bottom: 1rem;
+                        left: 100%;
+                        font-size: 2rem;
+                    }
+
+                    .scripture {
+                        text-align: center;
+                    }
+
+                    .scripture-citation {
+                        text-align: right;
+                    }
+
+                footer {
+                    box-sizing: border-box;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 0.25rem;
+                    margin: 0px auto;
+                    border-radius: 15px 15px 0px 0px;
+                    padding: 0.5rem 2rem;
+                    width: 90%;
+                    max-width: 1000px;
+                    background-color: var(--bg-footer);
+                    color: var(--content-copyright);
+                    text-align: center;
+                }
+
+                    footer p,
+                    footer a {
+                        font-size: 0.8rem;
+                        margin: 0px;
+                        width: max-content;
+                    }
+
+                    footer a {
+                        text-decoration: none;
+                    }
+
+            @media only screen and (max-width: 780px) and (orientation: portrait) {
+                :root {
+                    --columns-hero: var(--mobile-columns);
+                    --columns-what-how: var(--mobile-columns);
+                    --columns-author: var(--mobile-columns);
+                }
+
+                html {
+                    text-align: center !important;
+                    line-height: 1.6rem !important;
+                }
+
+                section {
+                    justify-items: center !important;
+                }
+
+                .hero {
+                    padding-top: 20dvh;
+                    grid-template-rows: var(----mobile-rows-hero);
+                    align-content: space-between;
+                    justify-items: center;
+                }
+
+                .socials {
+                    width: 100%;
+                    justify-content: space-evenly;
+                }
+
+                footer {
+                    flex-direction: column;
+                    border-radius: 0px;
+                    width: 100%;
+                }
+
+                article,
+                blockquote,
+                h2,
+                p:not(footer p) {
+                    justify-self: center !important;
+                    width: 100% !important;
+                }
+            }
+
+        </style>
+
+    </head>
+    <body <?php body_class(); ?>>
