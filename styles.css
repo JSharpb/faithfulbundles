@@ -264,8 +264,11 @@ a {
             width: max-content;
         }
 
-        footer a {
-            text-decoration: none;
+        @supports (text-decoration-thickness: 0.025em) {
+            footer a {
+                text-decoration-thickness: 0.025em;
+                text-underline-offset: 0.15em;
+            }
         }
 
 @media only screen and (max-width: 780px) and (orientation: portrait) {
